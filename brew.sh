@@ -36,6 +36,8 @@ brew install wget --with-iri
 # Install GnuPG to enable PGP-signing commits.
 brew install gnupg
 
+
+
 # Install more recent versions of some macOS tools.
 brew install vim --with-override-system-vi
 brew install grep
@@ -102,6 +104,14 @@ brew install flow
 brew install diff-so-fancy
 brew install go
 brew install chrome-cli
+
+# misc
+brew tap caskroom/fonts
+brew cask font-hack-nerd-font
+brew cask google-chrome
+brew cask firefox
+brew cask iterm
+brew cask spotify
 
 # Remove outdated versions from the cellar.
 brew cleanup

@@ -208,6 +208,10 @@ function zz() {
   cd ~/dev && cd $*
 }
 
+function brg() {
+	bower-git $1 && cd $!
+}
+
 function clone {
   # customize username to your own
   local username="johnie"
@@ -270,4 +274,14 @@ dcleanup(){
   docker rm $(docker ps -aq 2>/dev/null) 2>/dev/null
   docker rm -v $(docker ps --filter status=exited -q 2>/dev/null) 2>/dev/null
   docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2>/dev/null
+}
+
+# cd to Finder
+cdf() {
+    target=`osascript -e 'tell application "Finder" to if (count of Finder windows) > 0 then get POSIX path of (target of front Finder window as text)'`
+    if [ "$target" != "" ]; then
+        cd "$target"
+    else
+        echo 'No Finder window found' >&2
+    fi
 }
