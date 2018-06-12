@@ -25,8 +25,21 @@ alias reboot="sudo shutdown -r now"
 alias sov="pmset sleepnow"
 alias br="brightness"
 alias n1="open -a /Applications/'Nylas N1.app'"
-alias doc="docker"
-alias docc="docker-compose"
+alias cwd='pwd | pbcopy'
+
+# Docker
+alias k='docker'
+alias kc='docker compose'
+alias kl='docker logs'
+alias klt='docker logs --tail 100'
+alias ks='docker ps'
+alias ksq='docker ps -q'
+alias kk='docker kill'
+
+# Piping
+alias h2='head -n 2'
+alias h10='head -n 10'
+alias t10='tail -n 10'
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -39,9 +52,11 @@ fi
 
 # List all files colorized in long format
 alias l="ls -lF ${colorflag}"
+alias a="exa "
 
 # List all files colorized in long format, including dot files
 alias la="ls -laF ${colorflag}"
+alias ala="exa -la"
 
 # List only directories
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
