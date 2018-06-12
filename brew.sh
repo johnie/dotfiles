@@ -26,8 +26,8 @@ brew install bash-completion2
 
 # Switch to using brew-installed bash as default shell
 if ! fgrep -q '/usr/local/bin/bash' /etc/shells; then
-  echo '/usr/local/bin/bash' | sudo tee -a /etc/shells;
-  chsh -s /usr/local/bin/bash;
+    echo '/usr/local/bin/bash' | sudo tee -a /etc/shells;
+    chsh -s /usr/local/bin/bash;
 fi;
 
 # Install `wget` with IRI support.
@@ -77,6 +77,7 @@ brew install xz
 
 # Install other useful binaries.
 brew install ack
+brew install the_silver_surfer
 #brew install exiv2
 brew install git
 brew install git-lfs
@@ -92,6 +93,14 @@ brew install ssh-copy-id
 brew install tree
 brew install vbindiff
 brew install zopfli
+brew install httpie
+brew install hub
+brew install jo
+brew install git-extras
+brew install flow
+brew install diff-so-fancy
+brew install go
+brew install chrome-cli
 
 # Remove outdated versions from the cellar.
 brew cleanup

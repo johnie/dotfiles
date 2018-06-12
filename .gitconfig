@@ -1,3 +1,7 @@
+[user]
+	name = Johnie Hjelm
+	email = johnie.hjelm@mrggroup.com
+
 [alias]
 
 	# View abbreviated SHA, description, and history graph of the latest 20 commits
@@ -78,6 +82,9 @@
 			git commit --amend -m \"$(git log -1 --pretty=%B)\n\nCloses #$1.\"; \
 		fi \
 	}; f"
+
+	up = push
+	down = pull
 
 [apply]
 
@@ -185,3 +192,6 @@
 [url "git://gist.github.com/"]
 
 	insteadOf = "gist:"
+
+[github]
+	user = johnie

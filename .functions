@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Create a new directory and enter it
-function mkd() {
+function mdn() {
 	mkdir -p "$@" && cd "$_";
 }
 
@@ -160,16 +160,6 @@ function getcertnames() {
 	fi;
 }
 
-# `s` with no arguments opens the current directory in Sublime Text, otherwise
-# opens the given location
-function s() {
-	if [ $# -eq 0 ]; then
-		subl .;
-	else
-		subl "$@";
-	fi;
-}
-
 # `v` with no arguments opens the current directory in Vim, otherwise opens the
 # given location
 function v() {
@@ -196,4 +186,88 @@ function o() {
 # small enough for one screen.
 function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
+}
+
+# Battery status
+function batt() {
+  pmset -g batt
+}
+
+# find shorthand
+function f() {
+    find . -name "$1"
+}
+
+# Add space to Dock
+function addspace() {
+  defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}';
+  killall Dock
+}
+
+function zz() {
+  cd ~/dev && cd $*
+}
+
+function clone {
+  # customize username to your own
+  local username="johnie"
+
+  local url=$1;
+  local repo=$2;
+
+  if [[ ${url:0:4} == 'http' || ${url:0:3} == 'git' ]]
+  then
+    # just clone this thing.
+    repo=$(echo $url | awk -F/ '{print $NF}' | sed -e 's/.git$//');
+  elif [[ -z $repo ]]
+  then
+    # my own stuff.
+    repo=$url;
+    url="git@github.com:$username/$repo";
+  else
+    # not my own, but I know whose it is.
+    url="git@github.com:$url/$repo.git";
+  fi
+
+  git clone $url $repo && cd $repo && open -a Visual\ Studio\ Code.app .;
+}
+
+# take this repo and copy it to somewhere else minus the .git stuff.
+function gitexport(){
+	mkdir -p "$1"
+	git archive master | tar -x -C "$1"
+}
+
+# Open github repo with current directory name
+function ghd(){
+  if type hub; then
+    hub browse
+  else
+    open -a google\ chrome 'http://github.com/johnie/'${PWD##*/}
+  fi
+}
+
+# Open github user or and repo
+function ghu(){
+   open -a google\ chrome 'http://github.com/'$1'/'$2
+}
+
+# gitignore.io api function
+function gi(){
+  curl http://www.gitignore.io/api/\$@ ;
+}
+
+# Git merge no fast forward
+function gmff() {
+  if [ ! -n "$1" ]; then
+    echo "Enter a branch name"
+  else
+    git merge --no-ff $1
+  fi
+}
+
+dcleanup(){
+  docker rm $(docker ps -aq 2>/dev/null) 2>/dev/null
+  docker rm -v $(docker ps --filter status=exited -q 2>/dev/null) 2>/dev/null
+  docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2>/dev/null
 }

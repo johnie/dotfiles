@@ -4,6 +4,9 @@
 # Folder view configuration files
 .DS_Store
 Desktop.ini
+node_modules
+.vscode
+npm-debug.log
 
 # Thumbnail cache files
 ._*
